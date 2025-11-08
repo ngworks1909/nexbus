@@ -2,7 +2,7 @@ import { afterAll, beforeEach, describe, expect, it, jest } from "@jest/globals"
 import { PrismaClient } from "@repo/db/generated/prisma/client";
 import { DeepMockProxy, mockReset } from "jest-mock-extended";
 import request from "supertest";
-import { app } from "../../../index";
+import {app} from "../../../index";
 import { prisma } from "../../../lib/client";
 import jwt from "jsonwebtoken";
 
