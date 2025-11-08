@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --verbose",
     "dev": "npm run db:generate && npx tsc -b && nodemon dist/bin.js",
+    "start": "npm run db:generate && npx tsc -b && nodemon dist/bin.js",
     "db:generate": "prisma generate --schema=../../packages/db/prisma/schema.prisma"
   },
   "keywords": [],
