@@ -12,21 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const globals_1 = require("@jest/globals");
+const library_1 = require("@prisma/client/runtime/library");
+const jest_mock_extended_1 = require("jest-mock-extended");
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = require("../../../index");
-const client_1 = require("@repo/db/generated/prisma/client");
-const client_2 = require("../../../lib/client");
-const jest_mock_extended_1 = require("jest-mock-extended");
-const globals_1 = require("@jest/globals");
+const client_1 = require("../../../lib/client");
 globals_1.jest.mock("../../../lib/client");
-const prismaMock = client_2.prisma;
+const prismaMock = client_1.prisma;
 (0, globals_1.beforeEach)(() => {
     (0, jest_mock_extended_1.mockReset)(prismaMock);
     globals_1.jest.clearAllMocks();
 });
 (0, globals_1.afterAll)(() => __awaiter(void 0, void 0, void 0, function* () {
-    if (typeof client_2.prisma.$disconnect === "function") {
-        yield client_2.prisma.$disconnect();
+    if (typeof client_1.prisma.$disconnect === "function") {
+        yield client_1.prisma.$disconnect();
     }
 }));
 (0, globals_1.describe)("POST /api/user/signup", () => {
@@ -138,7 +138,7 @@ const prismaMock = client_2.prisma;
     //  12. Unique constraint violation during create (Prisma P2002)
     (0, globals_1.it)("should fail if Prisma unique constraint (P2002) is triggered", () => __awaiter(void 0, void 0, void 0, function* () {
         prismaMock.user.findUnique.mockResolvedValue(null);
-        const prismaError = new client_1.Prisma.PrismaClientKnownRequestError("Unique constraint failed on the field: `mobile`", { code: "P2002", clientVersion: "5.13.0" });
+        const prismaError = new library_1.PrismaClientKnownRequestError("Unique constraint failed on the field: `mobile`", { code: "P2002", clientVersion: "5.13.0" });
         prismaMock.user.create.mockRejectedValue(prismaError);
         const res = yield (0, supertest_1.default)(index_1.app)
             .post("/api/user/signup")

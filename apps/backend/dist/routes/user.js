@@ -17,7 +17,7 @@ const userValidator_1 = require("../zod/userValidator");
 const client_1 = require("../lib/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const auth_1 = require("../middleware/auth");
-const client_2 = require("@repo/db/generated/prisma/client");
+const library_1 = require("@prisma/client/runtime/library");
 const router = (0, express_1.Router)();
 /**
  * Normalize a username by trimming extra spaces and capitalizing each word.
@@ -103,7 +103,7 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (error) {
-        if (error instanceof client_2.Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+        if (error instanceof library_1.PrismaClientKnownRequestError && error.code === "P2002") {
             return res.status(400).json({
                 success: false,
                 message: "User already exists.",

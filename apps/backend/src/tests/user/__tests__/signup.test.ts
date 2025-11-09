@@ -1,9 +1,10 @@
+import { afterAll, beforeEach, describe, expect, it, jest } from "@jest/globals";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { PrismaClient } from "@repo/db";
+import { DeepMockProxy, mockReset } from "jest-mock-extended";
 import request from "supertest";
 import { app } from "../../../index";
-import { Prisma, PrismaClient } from "@repo/db/generated/prisma/client";
 import { prisma } from "../../../lib/client";
-import { mockReset, DeepMockProxy } from "jest-mock-extended";
-import { jest, beforeEach, afterAll, describe, it, expect } from "@jest/globals";
 
 jest.mock("../../../lib/client");
 
@@ -154,7 +155,7 @@ describe("POST /api/user/signup", () => {
   it("should fail if Prisma unique constraint (P2002) is triggered", async () => {
     prismaMock.user.findUnique.mockResolvedValue(null);
 
-    const prismaError = new Prisma.PrismaClientKnownRequestError(
+    const prismaError = new PrismaClientKnownRequestError(
       "Unique constraint failed on the field: `mobile`",
       { code: "P2002", clientVersion: "5.13.0" }
     );

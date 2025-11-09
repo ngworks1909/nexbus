@@ -3,7 +3,7 @@ import { loginValidator, otpValidator, referralValidator, signupValidator, updat
 import {prisma} from '../lib/client'
 import jwt from 'jsonwebtoken'
 import { UserRequest, verifyAuth } from "../middleware/auth";
-import { Prisma } from "@repo/db/generated/prisma/client";
+import { Prisma } from "@repo/db";
 
 const router = Router();
 

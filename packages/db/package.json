@@ -1,16 +1,21 @@
 {
   "name": "@repo/db",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "./generated/prisma/index.js",
+  "types": "./generated/prisma/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./generated/prisma/index.d.ts",
+      "default": "./generated/prisma/index.js"
+    }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "files": ["generated", "prisma"],
+  "scripts": {
+    "build": "prisma generate",
+    "dev": "prisma generate --watch"
+  },
   "dependencies": {
-    "@prisma/client": "^6.15.0"
+    "@prisma/client": "latest",
+    "prisma": "latest"
   }
 }

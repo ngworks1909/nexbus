@@ -4,8 +4,12 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**"],
+      "env": ["DATABASE_URL"]
+    },
+    "db#build": {
+      "cache": false,
+      "outputs": ["generated/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

@@ -78,7 +78,7 @@ router.post("/create", verifyAuth("USER"), async(req: UserRequest, res) => {
         }
 
 
-        await prisma.$transaction(async (tx) => {
+        await prisma.$transaction(async (tx: any) => {
             const newTrip = await tx.trip.create({
                 data: {
                     sourceId, destinationId, travelDate: normalizedTravelDate

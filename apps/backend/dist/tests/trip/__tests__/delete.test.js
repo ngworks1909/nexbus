@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const globals_1 = require("@jest/globals");
 const jest_mock_extended_1 = require("jest-mock-extended");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = require("../../../index");
 const client_1 = require("../../../lib/client");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 globals_1.jest.mock("../../../lib/client");
 const prismaMock = client_1.prisma;
 (0, globals_1.beforeEach)(() => {
